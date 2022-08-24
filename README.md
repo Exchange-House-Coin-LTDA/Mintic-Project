@@ -4,4 +4,4 @@ Exchange House Coin LTDA
 Juan Diego Salazar Velasquez
 Daniel Alfredo Serrato Rios
 Cristhian Rodrigo Riveros Mesa
-Juan Sebastian Trujillo Escobar 
+Juan Sebastian Trujillo Escobar add  
