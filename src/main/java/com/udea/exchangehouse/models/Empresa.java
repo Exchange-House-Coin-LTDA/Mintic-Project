@@ -50,8 +50,8 @@ public class Empresa {
         return nit;
     }
 
-    public void setNit(String Nit) {
-        this.Nit = Nit;
+    public void setNit(String nit) {
+        this.nit = nit;
     }
     
     public String getId() {
