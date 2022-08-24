@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 public class ExchangeHouseApplication {
 
-    @GetMapping("/inicio")
-    public String inicio(){
-        return "Inicio";
+    @GetMapping("/empresa")
+    public String empresa(){
+        public Empresa empresa1 = new Empresa("Exchange House Coin", "Bogota", "3600566", "9002858585");
+        String informacion = "Nombre de la empresa: " + empresa1.getNombre + "\nDireccion: " + empresa1.getDireccion + "\nTelefono: " + empresa1.getTelefono + "\nNIT: " + empresa1.getNIT;
+        return informacion;
     }
 
     public static void main(String[] args) {
