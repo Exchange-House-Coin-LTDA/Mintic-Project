@@ -1,21 +1,25 @@
 package com.udea.exchangehouse.models;
 
+//@entity
+//@table(name = "Empresa")
 public class Empresa {
-    
+
+    //@id
+    //@GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
     private String nombre;
     private String direccion;
     private String telefono;
-    //@id
-    private String NIT;
+    private String nit;
   
     public Empresa() {
     }
 
-    public Empresa(String nombre, String direccion, String telefono, String NIT) {
+    public Empresa(String nombre, String direccion, String telefono, String nit) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.telefono = telefono;
-        this.NIT = NIT;
+        this.nit = nit;
     }
     
     public String getNombre() {
@@ -42,12 +46,20 @@ public class Empresa {
         this.telefono = telefono;
     }
 
-    public String getNIT() {
-        return NIT;
+    public String getNit() {
+        return nit;
     }
 
-    public void setNIT(String NIT) {
-        this.NIT = NIT;
+    public void setNit(String nit) {
+        this.nit = nit;
+    }
+    
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
   
 }
