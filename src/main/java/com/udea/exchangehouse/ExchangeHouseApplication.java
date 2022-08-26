@@ -2,6 +2,7 @@ package com.udea.exchangehouse;
 
 import com.udea.exchangehouse.models.Empleado;
 import com.udea.exchangehouse.models.Empresa;
+import com.udea.exchangehouse.models.MovimientoDinero;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
@@ -23,6 +24,12 @@ public class ExchangeHouseApplication {
     public String empleado(){
         Empleado empleado1 = new Empleado();
         return "Empleado";
+    }
+
+    @GetMapping("/movimiento")
+    public String movimiento(){
+        MovimientoDinero movimientoDinero = new MovimientoDinero();
+        return "movimiento";
     }
 
     public static void main(String[] args) {

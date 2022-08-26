@@ -1,11 +1,13 @@
 package com.udea.exchangehouse.models;
 
-//@entity
-//@table(name = "Empresa")
+import javax.persistence.*;
+
+@Entity
+@Table(name = "Empresa")
 public class Empresa {
 
-    //@id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String nombre;
     private String direccion;
