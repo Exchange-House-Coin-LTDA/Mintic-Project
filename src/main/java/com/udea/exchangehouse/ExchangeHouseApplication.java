@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 public class ExchangeHouseApplication {
 
-    @GetMapping("/inicio")
-    public String inicio(){
-        return "Inicio";
+    @GetMapping("/empleado")
+    public String empleado(){
+        return "Empleado";
     }
 
     public static void main(String[] args) {
