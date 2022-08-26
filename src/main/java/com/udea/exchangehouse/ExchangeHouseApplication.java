@@ -1,6 +1,8 @@
 package com.udea.exchangehouse;
 
+import com.udea.exchangehouse.models.Empleado;
 import com.udea.exchangehouse.models.Empresa;
+import com.udea.exchangehouse.models.MovimientoDinero;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
@@ -16,6 +18,18 @@ public class ExchangeHouseApplication {
         Empresa empresa1 = new Empresa("Exchange House Coin", "Bogota", "3600566", "9002858585");
         String informacion = "<h1>Informacion de la empresa</h1>" + "<br><b>Nombre de la empresa: </b>" + empresa1.getNombre() + "<br><b>Direccion: </b>" + empresa1.getDireccion() + "<br><b>Telefono: </b>" + empresa1.getTelefono() + "<br><b>NIT: </b>" + empresa1.getNit();
         return informacion;
+    }
+
+    @GetMapping("/empleado")
+    public String empleado(){
+        Empleado empleado1 = new Empleado();
+        return "Empleado";
+    }
+
+    @GetMapping("/movimiento")
+    public String movimiento(){
+        MovimientoDinero movimientoDinero = new MovimientoDinero();
+        return "movimiento";
     }
 
     public static void main(String[] args) {
