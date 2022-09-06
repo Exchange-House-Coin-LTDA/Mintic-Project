@@ -11,8 +11,8 @@ public class MovimientoDinero {
     private int id;
     private long monto;
     private String concepto;
-    //@ManyToOne
-    //@JoinColumn(name = "empleado_id")
+    @ManyToOne
+    @JoinColumn(name = "empleado_id")
     private Empleado usuario;
 
     public MovimientoDinero() {
