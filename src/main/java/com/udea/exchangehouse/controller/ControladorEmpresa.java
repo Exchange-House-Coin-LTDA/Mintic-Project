@@ -6,9 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-public class controlador {
+public class ControladorEmpresa {
     @Autowired
     EmpresaServ empresaServ;
 
@@ -23,13 +24,13 @@ public class controlador {
     }
 
     @GetMapping("/enterprises/{id}")
-    public Empresa empresaPorID(@PathVariable("id") Integer id){
+    public Optional<Empresa> empresaPorID(@PathVariable("id") Integer id){
         return this.empresaServ.empresaPorId(id);
     }
 
     @PatchMapping("/enterprises/{id}")
     public Empresa actualizarEmpresa(@PathVariable("id") Integer id, @RequestBody Empresa empresa){
-        Empresa emp= empresaServ.empresaPorId(id);
+        Empresa emp= empresaServ.empresaPorId(id).get();
         emp.setNombre(empresa.getNombre());
         emp.setDireccion(empresa.getDireccion());
         emp.setTelefono(empresa.getTelefono());
