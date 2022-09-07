@@ -1,6 +1,5 @@
 package com.udea.exchangehouse.services;
 
-import com.udea.exchangehouse.models.Empresa;
 import com.udea.exchangehouse.models.MovimientoDinero;
 import com.udea.exchangehouse.repository.MovimientoDineroRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MovimientoDineroServ {
@@ -20,8 +20,8 @@ public class MovimientoDineroServ {
         return movimientosList;
     }
 
-    public MovimientoDinero getMovimientoById(Integer id){
-        return movimientoDineroRepo.findById(id).get();
+    public Optional<MovimientoDinero> getMovimientoById(Integer id){
+        return movimientoDineroRepo.findById(id);
     }
 
     public MovimientoDinero saveOrUpdateMovimiento(MovimientoDinero movimientoDinero){

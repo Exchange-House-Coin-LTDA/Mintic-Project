@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmpleadoServ {
@@ -19,8 +20,8 @@ public class EmpleadoServ {
         return empleadoList;
     }
 
-    public Empleado empleadoPorId(Integer id){
-        return empleadoRepo.findById(id).get();
+    public Optional<Empleado> empleadoPorId(Integer id){
+        return empleadoRepo.findById(id);
     }
 
     public Empleado guardarActualizarEmpleado(Empleado empleado){
