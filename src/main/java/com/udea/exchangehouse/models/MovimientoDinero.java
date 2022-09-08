@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Table(name="Movimiento")
 public class MovimientoDinero {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private long monto;
     private String concepto;
@@ -48,10 +48,11 @@ public class MovimientoDinero {
         this.concepto = concepto;
     }
 
-    public Empleado getEmpleado() {
+    public Empleado getUsuario() {
         return usuario;
     }
-    public void setEmpleado(Empleado empleado) {
-        this.usuario = empleado;
+
+    public void setUsuario(Empleado usuario) {
+        this.usuario = usuario;
     }
 }

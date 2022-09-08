@@ -1,6 +1,7 @@
 package com.udea.exchangehouse.models;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "Empresa")
@@ -13,8 +14,19 @@ public class Empresa {
     private String direccion;
     private String telefono;
     private String nit;
+
+    @OneToMany
+    private Set<Empleado> empleado;
   
     public Empresa() {
+    }
+
+    public Set<Empleado> getEmpleado() {
+        return empleado;
+    }
+
+    public void setEmpleado(Set<Empleado> empleado) {
+        this.empleado = empleado;
     }
 
     public Empresa(String nombre, String direccion, String telefono, String nit) {
