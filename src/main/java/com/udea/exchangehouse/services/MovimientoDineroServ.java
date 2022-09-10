@@ -1,5 +1,6 @@
 package com.udea.exchangehouse.services;
 
+import com.udea.exchangehouse.DTO.MovimientoDineroDTO;
 import com.udea.exchangehouse.models.MovimientoDinero;
 import com.udea.exchangehouse.repository.MovimientoDineroRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,21 @@ public class MovimientoDineroServ {
         return movimientoDineroRepo.findById(id);
     }
 
-    public MovimientoDinero saveOrUpdateMovimiento(MovimientoDinero movimientoDinero){
-        MovimientoDinero mov=movimientoDineroRepo.save(movimientoDinero);
-        return mov;
+    public MovimientoDinero saveMovimiento(MovimientoDineroDTO movimientoDineroDTO){
+        MovimientoDinero movimientoDinero = new MovimientoDinero();
+        movimientoDinero.setMonto(movimientoDineroDTO.getMonto());
+        movimientoDinero.setConcepto(movimientoDineroDTO.getConcepto());
+        movimientoDinero.setUsuario(movimientoDineroDTO.getUsuario());
+        return this.movimientoDineroRepo.save(movimientoDinero);
+    }
+
+    public MovimientoDinero updateMovimiento(MovimientoDineroDTO movimientoDineroDTO){
+        MovimientoDinero movimientoDinero = new MovimientoDinero();
+        movimientoDinero.setId(movimientoDineroDTO.getId());
+        movimientoDinero.setMonto(movimientoDineroDTO.getMonto());
+        movimientoDinero.setConcepto(movimientoDineroDTO.getConcepto());
+        movimientoDinero.setUsuario(movimientoDineroDTO.getUsuario());
+        return this.movimientoDineroRepo.save(movimientoDinero);
     }
 
     public boolean deleteMovimiento (Integer id){

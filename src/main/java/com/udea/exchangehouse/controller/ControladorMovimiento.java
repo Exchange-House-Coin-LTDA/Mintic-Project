@@ -1,5 +1,6 @@
 package com.udea.exchangehouse.controller;
 
+import com.udea.exchangehouse.DTO.MovimientoDineroDTO;
 import com.udea.exchangehouse.models.Empleado;
 import com.udea.exchangehouse.models.MovimientoDinero;
 import com.udea.exchangehouse.services.MovimientoDineroServ;
@@ -12,8 +13,11 @@ import java.util.Optional;
 @RestController
 public class ControladorMovimiento {
 
-    @Autowired
-    MovimientoDineroServ movimientoDineroServ;
+    private final MovimientoDineroServ movimientoDineroServ;
+
+    public ControladorMovimiento(MovimientoDineroServ movimientoDineroServ) {
+        this.movimientoDineroServ = movimientoDineroServ;
+    }
 
     @GetMapping("/movements")
     public List<MovimientoDinero> verMovimientos(){
@@ -21,8 +25,8 @@ public class ControladorMovimiento {
     }
 
     @PostMapping("/movements")
-    public MovimientoDinero agregarMovimiento(@RequestBody MovimientoDinero movimientoDinero){
-        return this.movimientoDineroServ.saveOrUpdateMovimiento(movimientoDinero);
+    public MovimientoDinero agregarMovimiento(@RequestBody MovimientoDineroDTO movimientoDineroDTO){
+        return this.movimientoDineroServ.saveMovimiento(movimientoDineroDTO);
     }
 
     @GetMapping("/movement/{id}")
@@ -31,12 +35,12 @@ public class ControladorMovimiento {
     }
 
     @PatchMapping("/movement/{id}")
-    public MovimientoDinero actualizarMovimiento(@PathVariable Integer id, @RequestBody MovimientoDinero movimientoDinero){
-        MovimientoDinero mov = this.movimientoDineroServ.getMovimientoById(id).get();
-        mov.setMonto(movimientoDinero.getMonto());
-        mov.setConcepto(movimientoDinero.getConcepto());
-        mov.setUsuario(movimientoDinero.getUsuario());
-        return this.movimientoDineroServ.saveOrUpdateMovimiento(mov);
+    public MovimientoDinero actualizarMovimiento(@PathVariable Integer id, @RequestBody MovimientoDineroDTO movimientoDineroDTO){
+        if(this.movimientoDineroServ.getMovimientoById(id).isPresent()){
+            movimientoDineroDTO.setId(id);
+            return this.movimientoDineroServ.updateMovimiento(movimientoDineroDTO);
+        }
+        return null;
     }
 
     @DeleteMapping("/movement/{id}")

@@ -1,5 +1,6 @@
 package com.udea.exchangehouse.controller;
 
+import com.udea.exchangehouse.DTO.EmpleadoDTO;
 import com.udea.exchangehouse.models.Empleado;
 import com.udea.exchangehouse.services.EmpleadoServ;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +12,11 @@ import java.util.Optional;
 @RestController
 public class ControladorUsuario {
 
-    @Autowired
-    EmpleadoServ empleadoServ;
+    private final EmpleadoServ empleadoServ;
+
+    public ControladorUsuario(EmpleadoServ empleadoServ) {
+        this.empleadoServ = empleadoServ;
+    }
 
     @GetMapping("/users")
     public List<Empleado> verEmpleados(){
@@ -20,8 +24,8 @@ public class ControladorUsuario {
     }
 
     @PostMapping("/users")
-    public Empleado agregarEmpleado(@RequestBody Empleado empleado){
-        return this.empleadoServ.guardarActualizarEmpleado(empleado);
+    public Empleado agregarEmpleado(@RequestBody EmpleadoDTO empleadoDTO){
+        return this.empleadoServ.saveEmpleado(empleadoDTO);
     }
 
     @GetMapping("/user/{id}")
@@ -30,13 +34,12 @@ public class ControladorUsuario {
     }
 
     @PatchMapping("/user/{id}")
-    public Empleado actualizarEmpleado(@PathVariable Integer id, @RequestBody Empleado empleado){
-        Empleado emp = this.empleadoServ.empleadoPorId(id).get();
-        emp.setNombre(empleado.getNombre());
-        emp.setCorreo(empleado.getCorreo());
-        emp.setEmpresa(empleado.getEmpresa());
-        emp.setRol(empleado.getRol());
-        return this.empleadoServ.guardarActualizarEmpleado(emp);
+    public Empleado actualizarEmpleado(@PathVariable Integer id, @RequestBody EmpleadoDTO empleadoDTO){
+        if(this.empleadoServ.empleadoPorId(id).isPresent()){
+            empleadoDTO.setId(id);
+            return this.empleadoServ.actualizarEmpleado(empleadoDTO);
+        }
+        return null;
     }
 
     @DeleteMapping("/user/{id}")
