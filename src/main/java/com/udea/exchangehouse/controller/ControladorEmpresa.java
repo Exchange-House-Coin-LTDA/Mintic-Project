@@ -1,5 +1,6 @@
 package com.udea.exchangehouse.controller;
 
+import com.udea.exchangehouse.DTO.EmpresaDTO;
 import com.udea.exchangehouse.models.Empresa;
 import com.udea.exchangehouse.services.EmpresaServ;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,11 @@ import java.util.Optional;
 
 @RestController
 public class ControladorEmpresa {
-    @Autowired
-    EmpresaServ empresaServ;
+    private final EmpresaServ empresaServ;
+
+    public ControladorEmpresa(EmpresaServ empresaServ) {
+        this.empresaServ = empresaServ;
+    }
 
     @GetMapping("/enterprises")
     public List<Empresa> verEmpresas(){
@@ -19,8 +23,8 @@ public class ControladorEmpresa {
     }
 
     @PostMapping("/enterprises")
-    public Empresa guardarEmpresa(@RequestBody Empresa emp){
-        return this.empresaServ.guardarActualizarEmpresa(emp);
+    public Empresa guardarEmpresa(@RequestBody EmpresaDTO empresaDTO){
+        return this.empresaServ.saveEmpresa(empresaDTO);
     }
 
     @GetMapping("/enterprises/{id}")
@@ -29,13 +33,12 @@ public class ControladorEmpresa {
     }
 
     @PatchMapping("/enterprises/{id}")
-    public Empresa actualizarEmpresa(@PathVariable("id") Integer id, @RequestBody Empresa empresa){
-        Empresa emp= empresaServ.empresaPorId(id).get();
-        emp.setNombre(empresa.getNombre());
-        emp.setDireccion(empresa.getDireccion());
-        emp.setTelefono(empresa.getTelefono());
-        emp.setNit(empresa.getNit());
-        return empresaServ.guardarActualizarEmpresa(emp);
+    public Empresa actualizarEmpresa(@PathVariable("id") Integer id, @RequestBody EmpresaDTO empresaDTO){
+        if(this.empresaServ.empresaPorId(id).isPresent()){
+            empresaDTO.setId(id);
+            return empresaServ.updateEmpresa(empresaDTO);
+        }
+        return null;
     }
 
     @DeleteMapping ("/enterprises/{id}")
