@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Editar Movimiento</title>
+  </head>
+  <body>
+    <h1>Editar Movimiento</h1>
+    <form th:action="@{/updateMovement}" th:object="${movimiento}" method="post">
+      <input type="hidden" th:field="*{id}">
+      <label for="concepto">Concepto</label>
+      <input type="text" id="concepto" th:field="*{concepto}">
+      <label for="monto">Monto</label>
+      <input type="number" id="monto" th:field="*{monto}">
+      <label for="usuario">Usuario</label>
+      <select th:field="*{usuario}" id="usuario" required>
+        <option th:each="usuario : ${usuarios}" th:text="${usuario.nombre}" th:value="${usuario.id}"></option>
+      </select>
+      <button> Actualizar Movimiento</button>
+    </form>
+  </body>
+</html>

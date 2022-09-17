@@ -57,4 +57,8 @@ public class MovimientoDineroServ {
     public ArrayList<MovimientoDinero> movimientosPorEmpresa (Integer id) {
         return movimientoDineroRepo.findByEmpresa(id);
     }
+
+    public Long sumarMovimientos(){
+        return this.movimientoDineroRepo.sumarMonto();
+    }
 }
