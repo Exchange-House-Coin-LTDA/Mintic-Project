@@ -1,5 +1,6 @@
 package com.udea.exchangehouse.services;
 
+import com.udea.exchangehouse.DTO.EmpleadoDTO;
 import com.udea.exchangehouse.models.Empleado;
 import com.udea.exchangehouse.repository.EmpleadoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,22 +12,39 @@ import java.util.Optional;
 
 @Service
 public class EmpleadoServ {
-    @Autowired
-    EmpleadoRepo empleadoRepo;
+    private final EmpleadoRepo empleadoRepo;
+
+    public EmpleadoServ(EmpleadoRepo empleadoRepo) {
+        this.empleadoRepo = empleadoRepo;
+    }
 
     public List<Empleado> todosLosEmpleados(){
-        List<Empleado> empleadoList = new ArrayList<>();
-        empleadoRepo.findAll().forEach(empleado -> empleadoList.add(empleado));
-        return empleadoList;
+        return this.empleadoRepo.findAll();
     }
 
     public Optional<Empleado> empleadoPorId(Integer id){
-        return empleadoRepo.findById(id);
+        return this.empleadoRepo.findById(id);
     }
 
-    public Empleado guardarActualizarEmpleado(Empleado empleado){
-        Empleado empl=empleadoRepo.save(empleado);
-        return empl;
+    public Empleado saveEmpleado(EmpleadoDTO empleadoDTO){
+        Empleado empleado = new Empleado();
+        empleado.setNombre(empleadoDTO.getNombre());
+        empleado.setCorreo(empleadoDTO.getCorreo());
+        empleado.setPassword(empleadoDTO.getPassword());
+        empleado.setEmpresa(empleadoDTO.getEmpresa());
+        empleado.setRol(empleadoDTO.getRol());
+        return this.empleadoRepo.save(empleado);
+    }
+
+    public Empleado actualizarEmpleado(EmpleadoDTO empleadoDTO){
+        Empleado empleado = new Empleado();
+        empleado.setId(empleadoDTO.getId());
+        empleado.setNombre(empleadoDTO.getNombre());
+        empleado.setCorreo(empleadoDTO.getCorreo());
+        empleado.setPassword(empleadoDTO.getPassword());
+        empleado.setEmpresa(empleadoDTO.getEmpresa());
+        empleado.setRol(empleadoDTO.getRol());
+        return this.empleadoRepo.save(empleado);
     }
 
     public boolean borrarEmpleado(Integer id){
@@ -38,4 +56,7 @@ public class EmpleadoServ {
         return false;
     }
 
+    public ArrayList<Empleado> obtenerPorEmpresa(Integer id){
+        return this.empleadoRepo.findByEmpresa(id);
+    }
 }

@@ -1,5 +1,6 @@
-package com.udea.exchangehouse.models;
+package com.udea.exchangehouse.DTO;
 
+import com.udea.exchangehouse.models.Empleado;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,16 +12,10 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Getter
 @Setter
-@Entity
-@Table(name="movimiento")
-public class MovimientoDinero {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class MovimientoDineroDTO {
+
     private int id;
     private long monto;
     private String concepto;
-    @ManyToOne
-    @JoinColumn(name = "empleado_id")
     private Empleado usuario;
-
 }

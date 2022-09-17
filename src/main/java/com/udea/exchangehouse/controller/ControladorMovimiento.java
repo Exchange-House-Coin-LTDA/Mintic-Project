@@ -1,60 +1,95 @@
 package com.udea.exchangehouse.controller;
 
+import com.udea.exchangehouse.DTO.EmpleadoDTO;
+import com.udea.exchangehouse.DTO.MovimientoDineroDTO;
 import com.udea.exchangehouse.models.Empleado;
 import com.udea.exchangehouse.models.MovimientoDinero;
+import com.udea.exchangehouse.services.EmpleadoServ;
 import com.udea.exchangehouse.services.MovimientoDineroServ;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+@Controller
 public class ControladorMovimiento {
 
-    @Autowired
-    MovimientoDineroServ movimientoDineroServ;
+    private final MovimientoDineroServ movimientoDineroServ;
+    private final EmpleadoServ empleadoServ;
 
+    public ControladorMovimiento(MovimientoDineroServ movimientoDineroServ, EmpleadoServ empleadoServ) {
+        this.movimientoDineroServ = movimientoDineroServ;
+        this.empleadoServ = empleadoServ;
+    }
+
+    //Consultar movimientos
     @GetMapping("/movements")
-    public List<MovimientoDinero> verMovimientos(){
-        return this.movimientoDineroServ.getAllMovimientos();
+    public String verMovimientos(Model model){
+        List<MovimientoDinero> movimientos= this.movimientoDineroServ.getAllMovimientos();
+        List<MovimientoDineroDTO> movimientoDineroDTOS = new ArrayList<>();
+        movimientos.forEach(movimiento -> movimientoDineroDTOS.add(new MovimientoDineroDTO(movimiento.getId(), movimiento.getMonto(),
+                movimiento.getConcepto(), movimiento.getUsuario())));
+        Long total = this.movimientoDineroServ.sumarMovimientos();
+        model.addAttribute("movimientos", movimientoDineroDTOS);
+        model.addAttribute("total", total);
+        return "verMovimientos";
     }
 
+    //Agregar Movimiento
+    @GetMapping("/adMovement")
+    public String agregarMovimiento(Model model){
+        MovimientoDineroDTO movimientoDineroDTO = new MovimientoDineroDTO();
+        List<Empleado> empleados = this.empleadoServ.todosLosEmpleados();
+        List<EmpleadoDTO> empleadoDTOS = new ArrayList<>();
+        empleados.forEach(empleado -> empleadoDTOS.add(new EmpleadoDTO(empleado.getId(),
+                empleado.getNombre(), empleado.getCorreo(), empleado.getPassword(), empleado.getEmpresa(),
+                empleado.getRol(), empleado.getMovimientos())));
+        model.addAttribute("movimiento", movimientoDineroDTO);
+        model.addAttribute("usuarios", empleadoDTOS);
+        return "agregarMovimiento";
+    }
+
+    //Guardar Movimiento
     @PostMapping("/movements")
-    public MovimientoDinero agregarMovimiento(@RequestBody MovimientoDinero movimientoDinero){
-        return this.movimientoDineroServ.saveOrUpdateMovimiento(movimientoDinero);
+    public String agregarMovimiento(MovimientoDineroDTO movimientoDineroDTO){
+        this.movimientoDineroServ.saveMovimiento(movimientoDineroDTO);
+        return "redirect:/movements";
     }
 
+    //Editar movimiento
     @GetMapping("/movement/{id}")
-    public Optional<MovimientoDinero> movimientoPorId(@PathVariable Integer id){
-        return this.movimientoDineroServ.getMovimientoById(id);
+    public String movimientoPorId(@PathVariable Integer id, Model model){
+        MovimientoDinero movimientoDinero = this.movimientoDineroServ.getMovimientoById(id).get();
+        MovimientoDineroDTO movimientoDineroDTO = new MovimientoDineroDTO(movimientoDinero.getId(),
+                movimientoDinero.getMonto(), movimientoDinero.getConcepto(), movimientoDinero.getUsuario());
+        List<Empleado> usuarios = this.empleadoServ.todosLosEmpleados();
+        List<EmpleadoDTO> usuariosDTO = new ArrayList<>();
+        usuarios.forEach(usuario -> usuariosDTO.add(new EmpleadoDTO(usuario.getId(), usuario.getNombre(),
+                usuario.getCorreo(), usuario.getPassword(), usuario.getEmpresa(), usuario.getRol(),
+                usuario.getMovimientos())));
+        model.addAttribute("movimiento", movimientoDineroDTO);
+        model.addAttribute("usuarios", usuariosDTO);
+        return "editarMovimiento";
     }
 
-    @PatchMapping("/movement/{id}")
-    public MovimientoDinero actualizarMovimiento(@PathVariable Integer id, @RequestBody MovimientoDinero movimientoDinero){
-        MovimientoDinero mov = this.movimientoDineroServ.getMovimientoById(id).get();
-        mov.setMonto(movimientoDinero.getMonto());
-        mov.setConcepto(movimientoDinero.getConcepto());
-        mov.setUsuario(movimientoDinero.getUsuario());
-        return this.movimientoDineroServ.saveOrUpdateMovimiento(mov);
+    //Actualizar movimiento
+    @PostMapping("/updateMovement")
+    public String actualizarMovimiento(MovimientoDineroDTO movimientoDineroDTO){
+        this.movimientoDineroServ.updateMovimiento(movimientoDineroDTO);
+        return "redirect:/movements";
     }
 
-    @DeleteMapping("/movement/{id}")
+    //Eliminar movimiento
+    @GetMapping("/deleteMovement/{id}")
     public String eliminarMovimiento(@PathVariable Integer id){
-        boolean respuesta = this.movimientoDineroServ.deleteMovimiento(id);
-        if(respuesta){
-            return "Se ha eliminado el movimiento con id: " + id;
-        }
-        return "No se ha podido eliminar el movimiento con id: " + id;
+        this.movimientoDineroServ.deleteMovimiento(id);
+        return "redirect:/movements";
     }
 
-    @GetMapping("/enterprise/{id}/movements")
-    public List<MovimientoDinero> movimientosPorEmpresa(@PathVariable Integer id){
-        return this.movimientoDineroServ.movimientosPorEmpresa(id);
-    }
 
-    @GetMapping("/user/{id}/movements")
-    public List<MovimientoDinero> movimientosPorEmpleado(@PathVariable Integer id){
-        return this.movimientoDineroServ.movimientosPorEmpleado(id);
-    }
+
+
 }

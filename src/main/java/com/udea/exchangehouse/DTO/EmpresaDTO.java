@@ -1,31 +1,23 @@
-package com.udea.exchangehouse.models;
+package com.udea.exchangehouse.DTO;
 
+import com.udea.exchangehouse.models.Empleado;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@Entity
-@Table(name = "empresa")
-public class Empresa {
+public class EmpresaDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nombre;
     private String direccion;
     private String telefono;
     private String nit;
-
-    @OneToMany
     private List<Empleado> empleados;
-  
-
 }
