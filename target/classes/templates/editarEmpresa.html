@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Editar Empresa</title>
+  </head>
+  <body>
+    <h1>Editar Empresa</h1>
+    <form th:action="@{/updateEnterprise}" th:object="${empresa}" method="post">
+      <input type="hidden" th:field="*{id}">
+      <label for="nombre">Nombre de la empresa</label>
+      <input type="text" id="nombre" th:field="*{nombre}">
+      <label for="direccion">Dirección de la empresa</label>
+      <input type="text" id="direccion" th:field="*{direccion}">
+      <label for="telefono">Telefóno de la empresa</label>
+      <input type="text" id="telefono" th:field="*{telefono}">
+      <label for="nit">Nit de la empresa</label>
+      <input type="text" id="nit" th:field="*{nit}">
+      <button> Actualizar empresa Empresa</button>
+    </form>
+  </body>
+</html>
