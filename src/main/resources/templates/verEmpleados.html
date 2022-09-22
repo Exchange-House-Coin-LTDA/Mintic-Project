@@ -1,37 +1,153 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Empleados</title>
-    </head>
-    <body>
-        <h1>Empleados</h1>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Correo</th>
-                <th>Contraseña</th>
-                <th>Empresa</th>
-                <th>Rol</th>
-                <th>Movimientos</th>
-                <th>Editar</th>
-                <th>Eliminar</th>
-            </tr>
-            <tr th:each="empleado : ${empleados}">
-                <td th:text="${empleado.id}"></td>
-                <td th:text="${empleado.nombre}"></td>
-                <td th:text="${empleado.correo}"></td>
-                <td th:text="${empleado.password}"></td>
-                <td th:text="${empleado.empresa.nombre}"></td>
-                <td th:text="${empleado.rol}"></td>
-                <td><button type="button" ><a th:href="@{/user/{id}/movements (id=${empleado.id})}">Ver</a></button></td>
-                <td><button type="button" ><a th:href="@{/user/{id}(id=${empleado.id})}">Editar</a></button></td>
-                <td><button type="button" ><a th:href="@{/deleteUser/{id}(id=${empleado.id})}">Eliminar</a></button></td>
-            </tr>
-        </table>
-        <a th:href="@{/adUser}">Agregar Empleado</a>
-        <a th:href="@{/enterprises}">Ver Empresas</a>
-        <a th:href="@{/adEnterprise}">Ver lista de Movimientos</a>
-    </body>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Exchange House Coin</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/dashboard/1-4-5/vendor/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/dashboard/1-4-5/vendor/font-awesome/css/font-awesome.min.css">
+    <!-- Fontastic Custom icon font-->
+    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/dashboard/1-4-5/css/fontastic.css">
+    <!-- Google fonts - Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <!-- jQuery Circle-->
+    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/dashboard/1-4-5/css/grasp_mobile_progress_circle-1.0.0.min.css">
+    <!-- Custom Scrollbar-->
+    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/dashboard/1-4-5/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="https://d19m59y37dris4.cloudfront.net/dashboard/1-4-5/css/style.default.css" id="theme-stylesheet">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="http://drive.google.com/uc?export=view&id=1djsDkWnREp6jG1BkEHVGzBr6I5xzO9ki">
+  </head>
+  <body>
+    <!-- Side Navbar -->
+    <nav class="side-navbar">
+      <div class="side-navbar-wrapper">
+        <!-- Sidebar Header    -->
+        <div class="sidenav-header d-flex align-items-center justify-content-center">
+          <!-- User Info-->
+          <div class="sidenav-header-inner text-center"><img src="https://marketplace.canva.com/EAEj17Y_k_k/2/0/1600w/canva-amarillo-y-negro-gamer-desgastado-imagen-de-perfil-de-twitch-41B81rUGLAg.jpg" alt="person" class="img-fluid rounded-circle">
+            <h2 class="h5">Cristhian Riveros</h2><span>Web Developer</span>
+          </div>
+          <div class="sidenav-header-logo">
+            <div class="text-center brand-small"><img src="https://marketplace.canva.com/EAEj17Y_k_k/2/0/1600w/canva-amarillo-y-negro-gamer-desgastado-imagen-de-perfil-de-twitch-41B81rUGLAg.jpg" alt="person" class="img-fluid rounded-circle"></div>
+          </div>
+        </div>
+        <!-- Sidebar Navigation Menus-->
+        <div class="main-menu">
+          <h5 class="sidenav-heading">Menu</h5>
+          <ul id="side-main-menu" class="side-menu list-unstyled">                  
+            <li><a th:href="@{/enterprises}"> <i class="icon-home"></i>Empresas</a></li>
+            <li class="active"><a th:href="@{/users}"> <i class="icon-user"></i>Empleados</a></li>
+            <li><a th:href="@{/movements}"> <i class="fa fa-bar-chart"></i>Movimientos</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="page">
+      <!-- navbar-->
+      <header class="header">
+        <nav class="navbar">
+          <div class="container-fluid">
+            <div class="navbar-holder d-flex align-items-center justify-content-between">
+              <div class="navbar-header"><a id="toggle-btn" href="#" class="menu-btn"><i class="icon-bars"> </i></a><a href="index.html" class="navbar-brand">
+                  <div><img src="http://drive.google.com/uc?export=view&id=142eFjF5YXfliZF9wBpmF22f7zeHK6FWP"></div></a></div>
+                <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+                <!-- Log out-->
+                <li class="nav-item"><a th:href="@{/logout}" class="nav-link logout"> <span style = "font-size:1.2rem" class="d-none d-sm-inline-block">Logout</span><i style = "font-size: 1.2rem" class="fa fa-sign-out"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <!-- Breadcrumb-->
+      <div class="breadcrumb-holder">
+        <div class="container-fluid">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a th:href="@{/users}">Empleados</a></li>
+            <li class="breadcrumb-item active">Lista Empleados</li>
+          </ul>
+        </div>
+      </div>
+      <section>
+        <div class="container-fluid">
+          <!-- Page Header-->
+          <header> 
+            <h1 class="h3 display">Empleados</h1>
+          </header>
+            <div class="col-lg-12">
+              <div class="card">
+                <div class="card-header" style="display: flex; justify-content: space-between;">
+                  <h4>Lista de Empleados</h4>
+                  <button type="button" class="btn btn-success" style="border-radius: 20px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                  </svg><a style="color: white; text-decoration: none" th:href="@{/adUser}"> Añadir Empleado</a></button>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                      <thead>
+                        <tr>
+                          <th># ID</th>
+                          <th>Nombre</th>
+                          <th>Correo</th>
+                          <th>Empresa</th>
+                          <th>Rol</th>
+                          <th>Ver Movimientos</th>
+                          <th><b>Eliminar</b></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr th:each="empleado : ${empleados}">
+                          <td th:text="${empleado.id}"></td>
+                          <td><a th:text="${empleado.nombre}" th:href="@{/user/{id}(id=${empleado.id})}"></a></td>
+                          <td th:text="${empleado.correo}"></td>
+                          <td th:text="${empleado.empresa.nombre}"></td>
+                          <td th:text="${empleado.rol}"></td>
+                          <td><a th:href="@{/user/{id}/movements (id=${empleado.id})}" th:ref>Ver</a></td>
+                          <td><a th:href="@{/deleteUser/{id}(id=${empleado.id})}" style="color:red">Eliminar</a></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </section>
+      <footer class="main-footer">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-6">
+              <p>Exchange House Coin LTDA &copy; 2022</p>
+            </div>
+            <div class="col-sm-6 text-right">
+              <!-- desarrolladores
+              <p>Design by <a href="https://bootstrapious.com/p/bootstrap-4-dashboard" class="external"></a></p>
+              Please do not remove the backlink to us unless you support further theme's development at https://bootstrapious.com/donate. It is part of the license conditions and it helps me to run Bootstrapious. Thank you for understanding :)-->
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script src="https://d19m59y37dris4.cloudfront.net/dashboard/1-4-5/vendor/jquery/jquery.min.js"></script>
+    <!-- JavaScript files
+    <script src="https://d19m59y37dris4.cloudfront.net/dashboard/1-4-5/vendor/popper.js/umd/popper.min.js"> </script>
+    <script src="https://d19m59y37dris4.cloudfront.net/dashboard/1-4-5/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://d19m59y37dris4.cloudfront.net/dashboard/1-4-5/js/grasp_mobile_progress_circle-1.0.0.min.js"></script>
+    <script src="https://d19m59y37dris4.cloudfront.net/dashboard/1-4-5/vendor/jquery.cookie/jquery.cookie.js"> </script>
+    <script src="https://d19m59y37dris4.cloudfront.net/dashboard/1-4-5/vendor/chart.js/Chart.min.js"></script>
+    <script src="https://d19m59y37dris4.cloudfront.net/dashboard/1-4-5/vendor/jquery-validation/jquery.validate.min.js"></script> -->
+    <script src="https://d19m59y37dris4.cloudfront.net/dashboard/1-4-5/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+    <!-- Main File-->
+    <script src="https://d19m59y37dris4.cloudfront.net/dashboard/1-4-5/js/front.js"></script>
+    <!--<script type="text/javascript"> function DoNav(url) { document.location.href = url; } </script> -->
+  </body>
 </html>
