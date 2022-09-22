@@ -2,31 +2,95 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"rel="stylesheet"integrity="sa384-gH2yIJqK">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /*body {*/
+        /*    background-image: url("https://drive.google.com/file/d/1-o0rqbTfeveTLjdn-NOFXVrpS-c_26cZ/view?usp=sharing");*/
+        /*    background-size: 100%;*/
+        /*    width: 100%;*/
+        /*    height: 100%;*/
+        /*}*/
 
-    <title>Hola soy un título</title>
+        .form-register {
+            width: 400px;
+            background: #393E46;
+            padding: 30px;
+            margin: auto;
+            margin-top: 100px;
+            border-radius: 4px;
+            color: white;
+            box-shadow: 7px 13px 37px #000;
+        }
+
+        .form-register h4 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-register h2 {
+            height: 40px;
+            text-align: center;
+            font-size: 25px;
+            line-height: 40px;
+        }
+
+        .form-register a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .form-register a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .form-register .botons {
+            width: 100%;
+            background: #33b35a;
+            border: none;
+            padding: 12px;
+            color: white;
+            margin: 16px 0;
+            font-size: 25px;
+            border-radius: 10px;
+            font-family: 'calibri';
+        }
+
+        .col-sm-6 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 18px;
+            margin-top: 30px;
+        }
+    </style>
+    <title>Exchange House Coin LTDA</title>
 </head>
 <body>
-<main>
-    <div class="px-4 py-5 my-5 text-center">
-        <img src="img/task.png"class="d-block mx-auto mb-4" height="100" alt="Tareas"/>
-        <h1 class="display-5 fw-bold">Sistema de gestión de tareas</h1>
-        <div class="col-lg-6 mx-auto">
-            <p class="lead mb-4">Organiza tus ideas de tareas para que nunca se te olvide lo que tienes que hacer.</p>
-            <div sec:authorize="!isAuthenticated()">
-                <a th:href="@{/oauth2/authorization/auth0}" class="btn btn-primary btn-lg px-4 gap-3">Inicia Sesión</a>
-            </div>
-            <div sec:authorize="isAuthenticated()">
-                <a th:href="@{/enterprises}" class="btn btn-primary btn-lg px-4 gap-3">Llévame a la aplicación</a>
-            </div>
+<section class="form-register">
+    <h4>
+        <img src="http://drive.google.com/uc?export=view&id=142eFjF5YXfliZF9wBpmF22f7zeHK6FWP" alt="logoempresa">
+    </h4>
+    <h2> Siempre estamos a tu alcance! </h2>
 
-            <button type="button" class="btn btn-outline-secondary btn-lg px-4">Saber más</button>
-        </div>
+    <div class="botons" sec:authorize="!isAuthenticated()">
+        <a th:href="@{/oauth2/authorization/auth0}" class="botons" type="submit" >Inicia Sesión</a>
     </div>
-</main>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-A3rJD856KowSb7dwLZdYEk"
+    <div class="botons" sec:authorize="isAuthenticated()">
+        <a th:href="@{/enterprises}" class="botons" type="submit" >Ingresar a la aplicación</a>
+    </div>
+
+    <div class="col-sm-6">
+        <p>Exchange House Coin LTDA &copy; 2022</p>
+    </div>
+</section>
+
 </body>
+
+
 </html>
