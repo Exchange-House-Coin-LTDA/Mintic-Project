@@ -19,7 +19,7 @@
         <option th:each="empresa : ${empresas}" th:text="${empresa.nombre}" th:value="${empresa.id}"></option>
       </select>
       <label for="rol">Rol del empleado</label>
-      <input type="text" id="rol" th:field="*{rol}">
+      <input type="text" id="rol" th:field="*{rol}" required="required">
       <button> Actualizar Empleado</button>
     </form>
   </body>

@@ -22,6 +22,7 @@ public class Empleado {
     private String nombre;
     private String correo;
     private String password;
+    private Boolean estado;
 
     @ManyToOne
     @JoinColumn(name = "empresa_id")

@@ -13,6 +13,11 @@
       <input type="email" id="correo" th:field="*{correo}">
       <label for="password">Contraseña del empleado</label>
       <input type="password" id="password" th:field="*{password}">
+      <label for="estado">estado del empleado</label>
+      <select th:field="*{estado}"  id="estado" required>
+        <option th:value=1>Activo</option>
+        <option th:value=0>Inactivo</option>
+      </select>
       <label for="empresa">Empresa a la que pertenece</label>
       <select th:field="*{empresa}" id="empresa" required>
         <option th:each="empresa : ${empresas}" th:text="${empresa.nombre}" th:value="${empresa.id}"></option>

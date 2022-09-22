@@ -9,6 +9,8 @@ import com.udea.exchangehouse.models.MovimientoDinero;
 import com.udea.exchangehouse.services.EmpleadoServ;
 import com.udea.exchangehouse.services.EmpresaServ;
 import com.udea.exchangehouse.services.MovimientoDineroServ;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +30,10 @@ public class ControladorEmpresa {
         this.movimientoDineroServ = movimientoDineroServ;
     }
 
+    @GetMapping("/")
+    public String index (Model model, @AuthenticationPrincipal OidcUser principal){
+        return "index";
+    }
     //Consultar empresas
     @GetMapping("/enterprises")
     public String verEmpresas(Model model){
@@ -95,7 +101,7 @@ public class ControladorEmpresa {
         List<Empleado> empleados = this.empleadoServ.obtenerPorEmpresa(id);
         List<EmpleadoDTO> empleadoDTOS = new ArrayList<>();
         empleados.forEach(empleado -> empleadoDTOS.add(new EmpleadoDTO(empleado.getId(),
-                empleado.getNombre(), empleado.getCorreo(), empleado.getPassword(), empleado.getEmpresa(),
+                empleado.getNombre(), empleado.getCorreo(), empleado.getPassword(), empleado.getEstado(), empleado.getEmpresa(),
                 empleado.getRol(), empleado.getMovimientos())));
         model.addAttribute("empleados", empleadoDTOS);
         return "verEmpleados";
