@@ -101,7 +101,7 @@ public class ControladorEmpresa {
         List<Empleado> empleados = this.empleadoServ.obtenerPorEmpresa(id);
         List<EmpleadoDTO> empleadoDTOS = new ArrayList<>();
         empleados.forEach(empleado -> empleadoDTOS.add(new EmpleadoDTO(empleado.getId(),
-                empleado.getNombre(), empleado.getCorreo(), empleado.getPassword(), empleado.getEstado(), empleado.getEmpresa(),
+                empleado.getNombre(), empleado.getCorreo(), empleado.getEmpresa(),
                 empleado.getRol(), empleado.getMovimientos())));
         model.addAttribute("empleados", empleadoDTOS);
         return "verEmpleados";
