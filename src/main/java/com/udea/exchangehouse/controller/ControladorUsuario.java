@@ -37,7 +37,7 @@ public class ControladorUsuario {
         List<Empleado> empleados = this.empleadoServ.todosLosEmpleados();
         List<EmpleadoDTO> empleadoDTOS = new ArrayList<>();
         empleados.forEach(empleado -> empleadoDTOS.add(new EmpleadoDTO(empleado.getId(),
-                empleado.getNombre(), empleado.getCorreo(), empleado.getPassword(), empleado.getEmpresa(),
+                empleado.getNombre(), empleado.getCorreo(), empleado.getEmpresa(),
                 empleado.getRol(), empleado.getMovimientos())));
         model.addAttribute("empleados", empleadoDTOS);
         return "verEmpleados";
@@ -68,7 +68,7 @@ public class ControladorUsuario {
     @GetMapping("/user/{id}")
     public String empleadoPorId(@PathVariable Integer id, Model model){
         Empleado empleado = this.empleadoServ.empleadoPorId(id).get();
-        EmpleadoDTO empleadoDTO = new EmpleadoDTO(empleado.getId(), empleado.getNombre(), empleado.getCorreo(), empleado.getPassword(),
+        EmpleadoDTO empleadoDTO = new EmpleadoDTO(empleado.getId(), empleado.getNombre(), empleado.getCorreo(),
                 empleado.getEmpresa(),empleado.getRol(),empleado.getMovimientos());
         List<Empresa> empresas = this.empresaServ.todasLasEmpresas();
         List<EmpresaDTO> empresasDTO = new ArrayList<>();

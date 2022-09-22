@@ -45,7 +45,7 @@ public class ControladorMovimiento {
         List<Empleado> empleados = this.empleadoServ.todosLosEmpleados();
         List<EmpleadoDTO> empleadoDTOS = new ArrayList<>();
         empleados.forEach(empleado -> empleadoDTOS.add(new EmpleadoDTO(empleado.getId(),
-                empleado.getNombre(), empleado.getCorreo(), empleado.getPassword(), empleado.getEmpresa(),
+                empleado.getNombre(), empleado.getCorreo(), empleado.getEmpresa(),
                 empleado.getRol(), empleado.getMovimientos())));
         model.addAttribute("movimiento", movimientoDineroDTO);
         model.addAttribute("usuarios", empleadoDTOS);
@@ -68,7 +68,7 @@ public class ControladorMovimiento {
         List<Empleado> usuarios = this.empleadoServ.todosLosEmpleados();
         List<EmpleadoDTO> usuariosDTO = new ArrayList<>();
         usuarios.forEach(usuario -> usuariosDTO.add(new EmpleadoDTO(usuario.getId(), usuario.getNombre(),
-                usuario.getCorreo(), usuario.getPassword(), usuario.getEmpresa(), usuario.getRol(),
+                usuario.getCorreo(), usuario.getEmpresa(), usuario.getRol(),
                 usuario.getMovimientos())));
         model.addAttribute("movimiento", movimientoDineroDTO);
         model.addAttribute("usuarios", usuariosDTO);

@@ -18,7 +18,6 @@ public class EmpleadoDTO {
     private int id;
     private String nombre;
     private String correo;
-    private String password;
     private Empresa empresa;
     private String rol;
     private List<MovimientoDinero> movimientos;
