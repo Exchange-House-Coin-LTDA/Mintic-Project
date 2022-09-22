@@ -163,14 +163,13 @@
           <div class="card-body">
             <div class="table-responsive" style="display: flex; justify-content: space-between;">
               <form th:action="@{/updateMovement}" th:object="${movimiento}" method="post" class="form-register">
-                <label for="id">ID del Movimiento<input class="controls" type="text" th:field="*{id}" id="id" required="required" readonly>
-                </label><br>
                 <label for="concepto">Concepto del Movimiento<input class="controls" type="text" id="concepto" th:field="*{concepto}" required="required">
                 </label><br>
                 <label for="monto">Monto del Movimiento<input class="controls" type="number" id="monto" th:field="*{monto}" required="required">
                 </label><br>
-                <label for="usuario">Usuario que realizo el Movimiento<input class="controls" th:field="*{usuario}" id="usuario" required="required" readonly>
-                </label><br>
+                <label for="usuario">Empleado<select th:field="*{usuario}" class="controls" id="usuario" required="required">
+                  <option th:each="usuario : ${usuarios}" th:text="${usuario.nombre}" th:value="${usuario.id}"></option>
+                </select>
                 <!--<input class="botons" type="submit" value="Submit">-->
                 <button class="botons" style="border-radius: 20px;"> Crear Movimiento  <i class="fa fa-bar-chart"></i></button>
               </form>
