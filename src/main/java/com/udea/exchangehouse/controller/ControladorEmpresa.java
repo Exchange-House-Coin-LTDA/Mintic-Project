@@ -34,6 +34,7 @@ public class ControladorEmpresa {
     public String index (Model model, @AuthenticationPrincipal OidcUser principal){
         return "index";
     }
+
     //Consultar empresas
     @GetMapping("/enterprises")
     public String verEmpresas(Model model){

@@ -1,34 +1,4 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>Agregar Empleado</title>
-  </head>
-  <body>
-    <h1>Agregar Empleado</h1>
-    <form th:action="@{/users}" th:object="${empleado}" method="post">
-      <label for="nombre">Nombre del empleado</label>
-      <input type="text" id="nombre" th:field="*{nombre}">
-      <label for="correo">Correo del empleado</label>
-      <input type="email" id="correo" th:field="*{correo}">
-      <label for="password">Contraseña del empleado</label>
-      <input type="password" id="password" th:field="*{password}">
-      <label for="estado">estado del empleado</label>
-      <select th:field="*{estado}"  id="estado" required>
-        <option th:value=1>Activo</option>
-        <option th:value=0>Inactivo</option>
-      </select>
-      <label for="empresa">Empresa a la que pertenece</label>
-      <select th:field="*{empresa}" id="empresa" required>
-        <option th:each="empresa : ${empresas}" th:text="${empresa.nombre}" th:value="${empresa.id}"></option>
-      </select>
-      <label for="rol">Rol del empleado</label>
-      <input type="text" id="rol" th:field="*{rol}">
-      <button> Crear Empleado</button>
-    </form>
-  </body>
-=======
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
@@ -243,5 +213,4 @@
 <script src="https://d19m59y37dris4.cloudfront.net/dashboard/1-4-5/js/front.js"></script>
 <!--<script type="text/javascript"> function DoNav(url) { document.location.href = url; } </script> -->
 </body>
->>>>>>> main
 </html>

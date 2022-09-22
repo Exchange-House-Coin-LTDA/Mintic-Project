@@ -1,44 +1,4 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Empleados</title>
-    </head>
-    <body>
-        <h1>Empleados</h1>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Correo</th>
-                <th>Contraseña</th>
-                <th>Estado</th>
-                <th>Empresa</th>
-                <th>Rol</th>
-                <th>Movimientos</th>
-                <th>Editar</th>
-                <th>Eliminar</th>
-            </tr>
-            <tr th:each="empleado : ${empleados}">
-                <td th:text="${empleado.id}"></td>
-                <td th:text="${empleado.nombre}"></td>
-                <td th:text="${empleado.correo}"></td>
-                <td th:text="${empleado.password}"></td>
-                <td th:if="${empleado.estado==true}">Activo</td>
-                <td th:if="${empleado.estado==false}">Inactivo</td>
-                <td th:text="${empleado.empresa.nombre}"></td>
-                <td th:text="${empleado.rol}"></td>
-                <td><button type="button" ><a th:href="@{/user/{id}/movements (id=${empleado.id})}">Ver</a></button></td>
-                <td><button type="button" ><a th:href="@{/user/{id}(id=${empleado.id})}">Editar</a></button></td>
-                <td><button type="button" ><a th:href="@{/deleteUser/{id}(id=${empleado.id})}">Eliminar</a></button></td>
-            </tr>
-        </table>
-        <a th:href="@{/adUser}">Agregar Empleado</a>
-        <a th:href="@{/enterprises}">Ver Empresas</a>
-        <a th:href="@{/adEnterprise}">Ver lista de Movimientos</a>
-    </body>
-=======
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8">
@@ -190,5 +150,4 @@
     <script src="https://d19m59y37dris4.cloudfront.net/dashboard/1-4-5/js/front.js"></script>
     <!--<script type="text/javascript"> function DoNav(url) { document.location.href = url; } </script> -->
   </body>
->>>>>>> main
 </html>

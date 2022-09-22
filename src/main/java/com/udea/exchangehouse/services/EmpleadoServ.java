@@ -30,8 +30,6 @@ public class EmpleadoServ {
         Empleado empleado = new Empleado();
         empleado.setNombre(empleadoDTO.getNombre());
         empleado.setCorreo(empleadoDTO.getCorreo());
-        empleado.setPassword(empleadoDTO.getPassword());
-        empleado.setEstado(empleadoDTO.getEstado());
         empleado.setEmpresa(empleadoDTO.getEmpresa());
         empleado.setRol(empleadoDTO.getRol());
         return this.empleadoRepo.save(empleado);
@@ -42,8 +40,6 @@ public class EmpleadoServ {
         empleado.setId(empleadoDTO.getId());
         empleado.setNombre(empleadoDTO.getNombre());
         empleado.setCorreo(empleadoDTO.getCorreo());
-        empleado.setPassword(empleadoDTO.getPassword());
-        empleado.setEstado(empleadoDTO.getEstado());
         empleado.setEmpresa(empleadoDTO.getEmpresa());
         empleado.setRol(empleadoDTO.getRol());
         return this.empleadoRepo.save(empleado);
