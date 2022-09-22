@@ -164,13 +164,11 @@
                 </label><br>
                 <label for="correo">Correo del Empleado<input class="controls" type="email" th:field="*{correo}" id="correo" placeholder="Ingrese su Correo" required="required">
                 </label><br>
-                <label for="password">Contraseña del Empleado<input class="controls" type="password" th:field="*{password}" id="password" placeholder="Ingrese su Contraseña" required="required">
-                </label><br>
                 <label for="empresa">Empresa a la que pertenece <select th:field="*{empresa}" class="controls" id="empresa" required="required">
                   <option th:each="empresa : ${empresas}" th:text="${empresa.nombre}" th:value="${empresa.id}"></option>
                 </select>
                 </label><br>
-                <label for="cargo">Rol del Empleado<input class="controls" type="text" th:field="*{rol}" id="rol" placeholder="Ingrese su Cargo" required="required">
+                <label for="rol">Rol del Empleado<input class="controls" type="text" th:field="*{rol}" id="rol" placeholder="Ingrese su Cargo" required="required">
                 </label><br>
                 <!--<input class="botons" type="submit" value="Submit">-->
                 <button class="botons" style="border-radius: 20px;"> Crear Empleado <i class="icon-user"></i></button>
