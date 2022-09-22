@@ -25,25 +25,6 @@
     <link rel="shortcut icon" href="http://drive.google.com/uc?export=view&id=1djsDkWnREp6jG1BkEHVGzBr6I5xzO9ki">
   </head>
   <body>
-<<<<<<< HEAD
-    <h1>Editar Empleado</h1>
-    <form th:action="@{/updateUser}" th:object="${empleado}" method="post">
-      <input type="hidden" id="id" th:field="*{id}">
-      <label for="nombre">Nombre del empleado</label>
-      <input type="text" id="nombre" th:field="*{nombre}">
-      <label for="correo">Correo del empleado</label>
-      <input type="email" id="correo" th:field="*{correo}">
-      <label for="password">Contraseña del empleado</label>
-      <input type="password" id="password" th:field="*{password}">
-      <label for="empresa">Empresa a la que pertenece</label>
-      <select th:field="*{empresa}" class="form-control" id="empresa" required="required">
-        <option th:each="empresa : ${empresas}" th:text="${empresa.nombre}" th:value="${empresa.id}"></option>
-      </select>
-      <label for="rol">Rol del empleado</label>
-      <input type="text" id="rol" th:field="*{rol}" required="required">
-      <button> Actualizar Empleado</button>
-    </form>
-=======
     <style>
       .form-register {
         width: 600px;
@@ -232,6 +213,5 @@
     <!-- Main File-->
     <script src="https://d19m59y37dris4.cloudfront.net/dashboard/1-4-5/js/front.js"></script>
     <!--<script type="text/javascript"> function DoNav(url) { document.location.href = url; } </script> -->
->>>>>>> main
   </body>
 </html>

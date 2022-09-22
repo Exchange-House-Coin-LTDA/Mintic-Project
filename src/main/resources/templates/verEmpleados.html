@@ -25,97 +25,6 @@
     <link rel="shortcut icon" href="http://drive.google.com/uc?export=view&id=1djsDkWnREp6jG1BkEHVGzBr6I5xzO9ki">
   </head>
   <body>
-<<<<<<< HEAD
-    <h1>Editar Empleado</h1>
-    <form th:action="@{/updateUser}" th:object="${empleado}" method="post">
-      <input type="hidden" id="id" th:field="*{id}">
-      <label for="nombre">Nombre del empleado</label>
-      <input type="text" id="nombre" th:field="*{nombre}">
-      <label for="correo">Correo del empleado</label>
-      <input type="email" id="correo" th:field="*{correo}">
-      <label for="password">Contraseña del empleado</label>
-      <input type="password" id="password" th:field="*{password}">
-      <label for="empresa">Empresa a la que pertenece</label>
-      <select th:field="*{empresa}" class="form-control" id="empresa" required="required">
-        <option th:each="empresa : ${empresas}" th:text="${empresa.nombre}" th:value="${empresa.id}"></option>
-      </select>
-      <label for="rol">Rol del empleado</label>
-      <input type="text" id="rol" th:field="*{rol}" required="required">
-      <button> Actualizar Empleado</button>
-    </form>
-=======
-    <style>
-      .form-register {
-        width: 600px;
-        background: #212529;
-        padding: 30px;
-        border-radius: 4px;
-        font-family: 'calibri';
-        color: white;
-        box-shadow: 7px 13px 37px #000;
-      }
-        
-      .card-header h4 {
-        font-size: 35px;
-        margin-bottom: 20px;
-      }
-        
-      .controls {
-        width: 100%;
-        background: #24303c;
-        padding: 10px;
-        border-radius: 4px;
-        margin-bottom: 16px;
-        border: 1px solid #33b35a;
-        font-family: 'calibri';
-        font-size: 18px;
-        color: white;
-      }
-      
-      .form-register p {
-        height: 40px;
-        text-align: center;
-        font-size: 18px;
-        line-height: 40px;
-      }
-      
-      .form-register a {
-        color: white;
-        text-decoration: none;
-      }
-      
-      .form-register a:hover {
-        color: white;
-        text-decoration: underline;
-      }
-        
-      .form-register .botons {
-        width: 100%;
-        background: #33b35a;
-        border-radius: 25px;
-        padding: 12px;
-        color: white;
-        margin: 20px 0;
-        font-size: 25px;
-        text-align: center;
-      }
-      .btn btn-green {
-        border-radius: 25px;
-        margin-top: 50px;
-        text-decoration: none;
-        background-color: #33b35a;
-      }
-
-      .btn btn-green:hover {
-        background-color: #33b35a;
-      }
-      .img-f{
-        width: 50%;
-        height: auto;
-        padding: 50px;
-      }
-
-    </style>
     <!-- Side Navbar -->
     <nav class="side-navbar">
       <div class="side-navbar-wrapper">
@@ -160,8 +69,8 @@
       <div class="breadcrumb-holder">
         <div class="container-fluid">
           <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a th:href="@{/enterprises}">Empleados</a></li>
-            <li class="breadcrumb-item active">Editar Empleado</li>
+            <li class="breadcrumb-item"><a th:href="@{/users}">Empleados</a></li>
+            <li class="breadcrumb-item active">Lista Empleados</li>
           </ul>
         </div>
       </div>
@@ -169,35 +78,43 @@
         <div class="container-fluid">
           <!-- Page Header-->
           <header> 
-            <h1 class="h3 display">Editar Empleado</h1>
+            <h1 class="h3 display">Empleados</h1>
           </header>
             <div class="col-lg-12">
               <div class="card">
                 <div class="card-header" style="display: flex; justify-content: space-between;">
-                  <h4>Editar Empleado</h4>
+                  <h4>Lista de Empleados</h4>
+                  <button type="button" class="btn btn-success" style="border-radius: 20px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                  </svg><a style="color: white; text-decoration: none" th:href="@{/adUser}"> Añadir Empleado</a></button>
                 </div>
                 <div class="card-body">
-                  <div class="table-responsive" style="display: flex; justify-content: space-between;">
-                    <form th:action="@{/updateUser}" th:object="${empleado}" method="post" class="form-register">
-                      <label for="id">ID del Empleado:<input class="controls" type="text" th:field="*{id}" id="id" required="required" readonly>
-                      </label><br>
-                      <label for="nombre">Nombre del Empleado:<input class="controls" type="text" th:field="*{nombre}" id="nombre" required="required">
-                      </label><br>
-                      <label for="correo">Correo del Empleado:<input class="controls" type="email" th:field="*{correo}" id="correo" required="required">
-                      </label><br>
-                      <label for="password">Contraseña del Empleado:<input class="controls" type="password" th:field="*{password}" id="password" required="required">
-                      </label><br>
-                      <label for="empresa">Empresa a la que Pertenece:<select th:field="*{empresa}" class="controls" id="empresa" required="required">
-                        <option th:each="empresa : ${empresas}" th:text="${empresa.nombre}" th:value="${empresa.id}"></option>
-                      </select>
-                      </label><br>
-                      <label for="rol">Rol del Empleado:<input class="controls" type="text" th:field="*{rol}" id="rol" required="required">
-                      </label><br>
-                      <!--<input class="botons" type="submit" value="Submit">-->
-                      <button class="botons" style="border-radius: 20px;">Actualizar Empleado  <i class="icon-user"></i></button>
-                    </form>
-                    <!--<img src="http://comunidad.iebschool.com/iebs/files/2015/04/employer-branding-1024x530.png" alt="empresa" class="img-f">-->
-                    <img src="http://drive.google.com/uc?export=view&id=1Yb-4XQqCBAkj6vF_AbegdSEA0g7DUCHW" alt="empresa" class="img-f">
+                  <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                      <thead>
+                        <tr>
+                          <th># ID</th>
+                          <th>Nombre</th>
+                          <th>Correo</th>
+                          <th>Empresa</th>
+                          <th>Rol</th>
+                          <th>Ver Movimientos</th>
+                          <th><b>Eliminar</b></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr th:each="empleado : ${empleados}">
+                          <td th:text="${empleado.id}"></td>
+                          <td><a th:text="${empleado.nombre}" th:href="@{/user/{id}(id=${empleado.id})}"></a></td>
+                          <td th:text="${empleado.correo}"></td>
+                          <td th:text="${empleado.empresa.nombre}"></td>
+                          <td th:text="${empleado.rol}"></td>
+                          <td><a th:href="@{/user/{id}/movements (id=${empleado.id})}" th:ref>Ver</a></td>
+                          <td><a th:href="@{/deleteUser/{id}(id=${empleado.id})}" style="color:red">Eliminar</a></td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
@@ -232,6 +149,5 @@
     <!-- Main File-->
     <script src="https://d19m59y37dris4.cloudfront.net/dashboard/1-4-5/js/front.js"></script>
     <!--<script type="text/javascript"> function DoNav(url) { document.location.href = url; } </script> -->
->>>>>>> main
   </body>
 </html>
