@@ -160,8 +160,6 @@
           <div class="card-body">
             <div class="table-responsive" style="display: flex; justify-content: space-between;">
               <form th:action="@{/updateEnterprise}" th:object="${empresa}" method="post" class="form-register">
-<!--                <label for="id">ID de la Empresa:<input class="controls" type="text" th:field="*{id}" id="id" required="required" readonly>-->
-<!--                </label><br>-->
                 <label for="Nit">NIT o RUT de la Empresa:<input class="controls" type="text" th:field="*{nit}" id="nit" placeholder="Ingrese su NIT o RUT" required="required">
                 </label><br>
                 <label for="Nombre">Nombre de la Empresa:<input class="controls" type="text" th:field="*{nombre}" id="nombre" placeholder="Ingrese Nombre de la Empresa" required="required">
