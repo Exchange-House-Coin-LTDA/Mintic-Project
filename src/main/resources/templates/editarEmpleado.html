@@ -166,8 +166,6 @@
                       </label><br>
                       <label for="correo">Correo del Empleado:<input class="controls" type="email" th:field="*{correo}" id="correo" required="required">
                       </label><br>
-                      <label for="password">Contraseña del Empleado:<input class="controls" type="password" th:field="*{password}" id="password" required="required">
-                      </label><br>
                       <label for="empresa">Empresa a la que Pertenece:<select th:field="*{empresa}" class="controls" id="empresa" required="required">
                         <option th:each="empresa : ${empresas}" th:text="${empresa.nombre}" th:value="${empresa.id}"></option>
                       </select>
